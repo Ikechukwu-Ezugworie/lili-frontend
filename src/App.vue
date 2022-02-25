@@ -1,5 +1,4 @@
 <script setup>
-import { CircuitBoard } from '././assets/index'
 import AppFooter from '././components/navs/AppFooter.vue'
 
 

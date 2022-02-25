@@ -16,6 +16,6 @@
     "src/**/*.d.ts", 
     "src/**/*.tsx",
     "src/**/*.vue", 
-    "src/hooks/store.js", 
+    "src/hooks/store.js", "src/assets/icons/index.js", 
   ]
 }
