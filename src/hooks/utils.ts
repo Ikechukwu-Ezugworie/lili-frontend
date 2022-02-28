@@ -1,10 +1,11 @@
 import { format, parseISO } from 'date-fns'
+import { reactive } from 'vue'
 
-export * from './event'
 
 export function noop(...args) { }
 
 export const formatMoney = (value: string | number) => `₦${chunkReverse(String(value), 3, ',')}`
+export const formatUnit = (value: string | number) => `${chunkReverse(String(value), 3, ',')}`
 
 export const chunkReverse = (str: string, size = 4, separator = '-') => {
   let start = str.length % size
@@ -94,3 +95,11 @@ export const formatTime = (val: string) => {
   const ex = parseISO(val)
   return format(ex, 'hh:mm a')
 }
+
+export const activityFlags = reactive({
+  PURCHASE: 1,
+  SIGNIN: 2,
+  SIGNUP: 3,
+  IS_PAYING: false,
+  loading: false,
+}); 

@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <div class="form--input form--select flex items-center" @click="showOpts = !disabled" :disabled="disabled || undefined">
+    <div class="select w-full max-w-md select-bordered flex items-center" @click="showOpts = !disabled" :disabled="disabled || undefined">
       <div class="w-full text-left" :class="!selected ? 'placeholder' : null">{{ selected || label }}</div>
     </div>
     <template v-if="showOpts">
@@ -62,6 +62,11 @@ export default defineComponent({
       required: false,
       type: Boolean as PropType<boolean>,
     },
+    defaultOpt: {
+      required: false,
+
+      type: String as PropType<string>,
+    },
     error: {
       required: false,
       type: [String, Boolean] as PropType<string|boolean>,
@@ -84,6 +89,8 @@ export default defineComponent({
       if (e instanceof KeyboardEvent && e.code === 'Escape') showOpts.value = false
     }
 
+//check if default Option props value exits and use as options else call getOptionValue()
+    // const selected = computed(() => props.defaultOpt ? props.defaultOpt : getOptValue(modelValue?.value))
     const selected = computed(() => getOptValue(modelValue?.value))
 
     const opts = computed(() => options.value.map(opt => {
