@@ -1,7 +1,6 @@
 <template>
   <div>
     <input
-      type="text"
       :placeholder="label"
       :disabled="disabled"
       :max="max || ''"
@@ -11,7 +10,7 @@
       @input="$emit('update:modelValue', $event.target.value)"
       @change="$emit('update:modelValue', $event.target.value)"
       :readonly="readonly"
-      class="input input-bordered w-full max-w-xs"
+      class="input input-bordered w-full max-w-md"
     />
 
     <div
@@ -38,6 +37,7 @@ export default defineComponent({
     type: {
       required: true,
       type: String as PropType<InputType>,
+      default: 'text',
     },
     max: {
       required: false,

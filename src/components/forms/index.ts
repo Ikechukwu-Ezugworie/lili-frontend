@@ -1,5 +1,5 @@
 import { nextTick, reactive, ref, Ref, unref, watch } from 'vue'
-import rdiff from 'recursive-diff'
+// import rdiff from 'recursive-diff'
 import { Validation } from '@vuelidate/core'
 import { helpers } from '@vuelidate/validators'
 import Input from './Input.vue';
@@ -45,28 +45,28 @@ export const useForm = (serverErrors?: Ref<ResponseError|undefined>) => {
   return { errorMsg, serverMsg: serverMsg(serverErrors) }
 }
 
-export const useTrackInputs = <T extends object>(inputs: T, watchProps: boolean = true) => {
-  let last: any = {...inputs}
-  const changed = ref(false)
-  const inputsRef = reactive<T>(inputs)
-  const clean = (newValue: T = {} as any) => nextTick(() => {
-    last = {...newValue}
-    changed.value = false
-  })
+// export const useTrackInputs = <T extends object>(inputs: T, watchProps: boolean = true) => {
+//   let last: any = {...inputs}
+//   const changed = ref(false)
+//   const inputsRef = reactive<T>(inputs)
+//   const clean = (newValue: T = {} as any) => nextTick(() => {
+//     last = {...newValue}
+//     changed.value = false
+//   })
 
-  watch(inputsRef, inputs => {
-    const ob = {...inputs}
+//   // watch(inputsRef, inputs => {
+//   //   const ob = {...inputs}
 
-    if (watchProps) {
-      const changes = rdiff.getDiff({...last}, ob)
-      changed.value = !!changes.length
-    } else {
-      changed.value = true
-    }
-  })
+//   //   if (watchProps) {
+//   //     const changes = rdiff.getDiff({...last}, ob)
+//   //     changed.value = !!changes.length
+//   //   } else {
+//   //     changed.value = true
+//   //   }
+//   // })
 
-  return { changed, clean, inputs: inputsRef, }
-}
+//   return { changed, clean, inputs: inputsRef, }
+// }
 
 const { regex } = helpers
 
