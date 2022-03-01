@@ -48,7 +48,7 @@ const user = reactive({
           alt="disco.label"
           class="
             w-1/6
-            h-1/3
+            h-1/4
             mb-2
             border
             shadow
