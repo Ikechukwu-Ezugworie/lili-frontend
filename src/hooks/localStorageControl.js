@@ -1,7 +1,6 @@
-const useLocalStorage = () => {
+export const useLocalStorage = () => {
   const getItem = key => {
     const data = typeof window !== 'undefined' ? localStorage.getItem(key) : ''
-
     try {
       return JSON.parse(data)
     } catch (err) {
@@ -20,4 +19,3 @@ const useLocalStorage = () => {
 
   return { getItem, setItem, removeItem }
 }
-export { useLocalStorage }
