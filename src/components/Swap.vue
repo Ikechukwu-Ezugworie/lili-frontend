@@ -9,7 +9,7 @@
       dark:bg-gray-100
       dark:hover:bg-gray-200
       hover:bg-gray-800
-      py-0.5
+      py-1
     "
     @change="onChange"
   >

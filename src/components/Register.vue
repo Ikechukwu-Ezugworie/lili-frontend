@@ -3,6 +3,7 @@ import { reactive, computed, toRefs, ref } from 'vue'
 import { errorMsgs, useForm, ResponseError, Input as TextInput, Select as SelectInput } from './forms/index'
 import { activityFlags } from '../hooks/utils'
 import { useAuth } from '../hooks/auth'
+import { useToast } from "vue-toastification"
 import { Login as LoginIcon } from '../assets/icons'
 import { useVuelidate } from '@vuelidate/core'
 import { helpers } from '@vuelidate/validators'
@@ -28,6 +29,7 @@ const { withMessage } = helpers
 const { register, loading } = useAuth()
 const errors = ref<Record<string, string[]>>()
 const { errorMsg, serverMsg } = useForm(errors)
+const toast = useToast();
 
 const rules = computed(() => ({
   name: {
@@ -74,18 +76,18 @@ const onSubmit = async (e: Event) => {
   if (!isValid) return
   // const resp = await register(toData())
   let resp = null
+  loading.value = true
   setTimeout(() => {
-    resp = {
-      success: true,
-      errors: false,
-    }
-  }, 1500)
-  if (resp.errors) {
-    errors.value = resp.errors
-  } else {
-    alert('Success')
-    // router.push('/home')
-  }
+    loading.value = false
+    toast.success("Singup successfull", {
+      toastClassName: "toast-class",
+    });
+  }, 2500)
+  // if (resp.errors) {
+  //   errors.value = resp.errors
+  // } else {
+  //   // router.push('/home')
+  // }
 }
 
 </script>
@@ -127,8 +129,12 @@ const onSubmit = async (e: Event) => {
       v-model="inputs.confirmPassword"
     />
     <div>
-      <button class="btn w-full gap-2" @click="onSubmit">
-        <login-icon class="rotate-180" />Signup
+      <button
+        class="btn w-full gap-2"
+        :class="{ loading: loading }"
+        @click="onSubmit"
+      >
+        <login-icon class="rotate-180" v-show="!loading" />Signup
       </button>
       <p class="text-xs mt-1 text-gray-400">
         Have an account?
@@ -144,4 +150,7 @@ const onSubmit = async (e: Event) => {
 </template>
 
 <style>
+.toast-class {
+  @apply bg-gray-700 text-gray-100 text-xs;
+}
 </style>

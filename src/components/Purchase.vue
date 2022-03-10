@@ -6,12 +6,26 @@ import VuePaystack from "vue-paystack2"
 import { useToast } from "vue-toastification"
 import { discos } from '../data/discos'
 import { CreditCard as CreditCardIcon } from '../assets/icons/index.js'
+import { useVuelidate } from '@vuelidate/core'
+import { helpers } from '@vuelidate/validators'
+import {
+  alpha,
+  email,
+  numeric,
+  required,
+  alphaNum,
+  minLength,
+  maxLength,
+} from '@vuelidate/validators/dist/raw.esm'
+
 
 
 const emit = defineEmits<{
   (e: 'setActivity', id: number | string): void
 }>()
-
+const { withMessage } = helpers
+const errors = ref<Record<string, string[]>>()
+const { errorMsg, serverMsg } = useForm(errors)
 const toast = useToast();
 
 const unitInfo = reactive({

@@ -131,7 +131,9 @@ onMounted(() => {
           >
             <cash-icon />Purchase
           </button>
-          <swap class="w-1/12 dark:text-gray-700" @change="toggleDarkScreen" />
+          <div class="w-1/12 dark:text-gray-700 tooltip tooltip-bottom" data-tip="toggle">
+            <swap class="p-3" @change="toggleDarkScreen" />
+          </div>
         </div>
 
         <div
