@@ -15,6 +15,7 @@ export const errorMsgs = {
   numeric: 'This field must be a number',
   email: 'This field must be a valid email',
   alpha: 'The field may only contain letters',
+  alphaNum: 'The field can only contain letters and numbers',
   address: 'This field must be a valid address',
   alphaSpace: 'The field may contain only alphanum and space characters',
   confirmed: (field: string) => `The ${field} confirmation does not match`,
