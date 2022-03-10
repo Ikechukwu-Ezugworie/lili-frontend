@@ -21,6 +21,8 @@ const unitInfo = reactive({
 
 
 
+
+
 const paystack = reactive({
   email: '',
   amount: null,
@@ -56,7 +58,12 @@ const buyUnit = () => {
 
 <template>
   <div class="space-y-7">
-    <select-input label="DISCOS" :options="discos" v-model="unitInfo.disco" :defaultOpt="discos[0].label" />
+    <select-input
+      label="DISCOS"
+      :options="discos"
+      v-model="unitInfo.disco"
+      :defaultOpt="discos[0].label"
+    />
     <text-input label="Meter Number" type="number" min="0" class="w-full" />
     <text-input label="Phone Number" type="number" min="0" class="w-full" />
     <text-input
@@ -73,7 +80,9 @@ const buyUnit = () => {
       class="w-full"
     />
     <div class="w-auto">
-      <button class="btn w-full gap-2" @click="buyUnit()"> <credit-card-icon/>Buy Now</button>
+      <button class="btn w-full gap-2" @click="buyUnit()">
+        <credit-card-icon />Buy Now
+      </button>
       <p class="text-xs mt-2 text-gray-400">
         Siginin to keep records of your purchase
         <!-- No account yet? -->

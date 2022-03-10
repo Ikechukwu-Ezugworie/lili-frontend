@@ -1,19 +1,135 @@
 <script setup lang="ts">
+import { reactive, computed, toRefs, ref } from 'vue'
 import { errorMsgs, useForm, ResponseError, Input as TextInput, Select as SelectInput } from './forms/index'
 import { activityFlags } from '../hooks/utils'
+import { useAuth } from '../hooks/auth'
 import { Login as LoginIcon } from '../assets/icons'
+import { useVuelidate } from '@vuelidate/core'
+import { helpers } from '@vuelidate/validators'
+import {
+  alpha,
+  email,
+  numeric,
+  required,
+  alphaNum,
+  minLength,
+  maxLength,
+} from '@vuelidate/validators/dist/raw.esm'
+
+const inputs = reactive({
+  name: null,
+  email: null,
+  phone: null,
+  password: null,
+  confirmPassword: null,
+});
+
+const { withMessage } = helpers
+const { register, loading } = useAuth()
+const errors = ref<Record<string, string[]>>()
+const { errorMsg, serverMsg } = useForm(errors)
+
+const rules = computed(() => ({
+  name: {
+    alpha: withMessage(errorMsgs.alphaNum, alphaNum),
+    required: withMessage(errorMsgs.required, required),
+    maxLength: withMessage(errorMsgs.maxLength(50), maxLength(50)),
+  },
+  email: {
+    email: withMessage(errorMsgs.email, email),
+    required: withMessage(errorMsgs.required, required),
+    maxLength: withMessage(errorMsgs.maxLength(100), maxLength(100)),
+  },
+  phone: {
+    numeric: withMessage(errorMsgs.numeric, numeric),
+    required: withMessage(errorMsgs.required, required),
+    maxLength: withMessage(errorMsgs.maxLength(11), maxLength(11)),
+    minLength: withMessage(errorMsgs.minLength(11), minLength(11)),
+  },
+  password: {
+    required: withMessage(errorMsgs.required, required),
+    minLength: withMessage(errorMsgs.minLength(6), minLength(6)),
+    confirmed: withMessage(
+      errorMsgs.confirmed('password'),
+      (value?: string) => {
+        if (!value) return true
+        return value === inputs.confirmPassword
+      }
+    ),
+  },
+}))
+
+const $v = useVuelidate(rules, toRefs(inputs))
+const toData = () => ({
+  name: inputs.name,
+  email: inputs.email,
+  phone: inputs.phone,
+  password: inputs.password,
+  password_confirmation: inputs.confirmPassword,
+})
+
+const onSubmit = async (e: Event) => {
+  errors.value = undefined
+  const isValid = await $v.value.$validate()
+  if (!isValid) return
+  // const resp = await register(toData())
+  let resp = null
+  setTimeout(() => {
+    resp = {
+      success: true,
+      errors: false,
+    }
+  }, 1500)
+  if (resp.errors) {
+    errors.value = resp.errors
+  } else {
+    alert('Success')
+    // router.push('/home')
+  }
+}
 
 </script>
 
 <template>
   <div class="space-y-7">
-    <text-input label="Full Name" type="text" class="w-full" />
-    <text-input label="Email" type="text" class="w-full" />
-    <text-input label="Phone Number" type="number" class="w-full" />
-    <text-input label="Password" type="password" class="w-full" />
-    <text-input label="Confirm Password" type="password" class="w-full" />
+    <text-input
+      label="Full Name"
+      type="text"
+      class="w-full"
+      v-model="inputs.name"
+      :error="errorMsg($v.name) || serverMsg('fullname')"
+    />
+    <text-input
+      label="Email"
+      type="text"
+      class="w-full"
+      v-model="inputs.email"
+      :error="errorMsg($v.email) || serverMsg('email')"
+    />
+    <text-input
+      label="Phone Number"
+      type="number"
+      class="w-full"
+      v-model="inputs.phone"
+      :error="errorMsg($v.phone) || serverMsg('phone number')"
+    />
+    <text-input
+      label="Password"
+      type="password"
+      class="w-full"
+      v-model="inputs.password"
+      :error="errorMsg($v.password) || serverMsg('password')"
+    />
+    <text-input
+      label="Confirm Password"
+      type="password"
+      class="w-full"
+      v-model="inputs.confirmPassword"
+    />
     <div>
-      <button class="btn w-full gap-2"> <login-icon class="rotate-180"/>Signup</button>
+      <button class="btn w-full gap-2" @click="onSubmit">
+        <login-icon class="rotate-180" />Signup
+      </button>
       <p class="text-xs mt-1 text-gray-400">
         Have an account?
         <span

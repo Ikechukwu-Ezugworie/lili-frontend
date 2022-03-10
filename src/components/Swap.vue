@@ -4,11 +4,11 @@
       swap swap-rotate
       text-gray-200
       dark:text-gray-700
-      bg-opacity-70
-      dark:bg-opacity-70
       rounded-lg
       bg-gray-700
-      dark:bg-gray-200
+      dark:bg-gray-100
+      dark:hover:bg-gray-200
+      hover:bg-gray-800
       py-0.5
     "
     @change="onChange"

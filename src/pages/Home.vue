@@ -3,7 +3,7 @@ import { defineComponent, PropType, computed, onMounted, onUnmounted, ref, react
 import AppNavbar from '../components/navs/AppNavbar.vue'
 import { errorMsgs, useForm, ResponseError, Input as TextInput, Select as SelectInput } from '../components/forms/index'
 import { useVuelidate } from '@vuelidate/core'
-import { helpers } from '@vuelidate/validators'
+import { helpers, required, email } from '@vuelidate/validators'
 import { Login as LoginIcon, Cash as CashIcon } from '../assets/icons/index.js'
 import { useToast } from "vue-toastification"
 import { Login, Register, Purchase, Swap } from '../components'
@@ -19,29 +19,15 @@ const setActivity = (flag: number) => {
 const { getItem, setItem, removeItem } = useLocalStorage();
 let theme = getItem('theme')
 
-const user = reactive({
-  name: '',
-  email: '',
-  password: '',
-  password_confirmation: '',
-  phone: '',
-  address: '',
-})
 
 const setTheme = (theme: string) => {
-  // setItem('theme', theme)
-  // console.log(theme, "Setting thisssss")
-    setItem('theme', theme)
+  setItem('theme', theme)
   if (theme === 'dark' || (!(theme) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.documentElement.classList.remove('light')
     document.documentElement.classList.add('dark')
-    // theme = 'dark'
-    // setTheme(theme)
   } else {
     document.documentElement.classList.remove('dark')
     document.documentElement.classList.add('light')
-    // theme = 'light'
-    // setTheme(theme)
   }
 }
 
@@ -51,7 +37,7 @@ const toggleDarkScreen = () => {
   // theme = flag ? 'dark' : 'light'
   theme = theme === 'dark' ? 'light' : 'dark'
   setTheme(theme)
-    console.log(theme, "Setting thisssss")
+  console.log(theme, "Setting thisssss")
 
 }
 
@@ -132,20 +118,20 @@ onMounted(() => {
         </div>
         <div class="flex flex-row space-x-2 w-full justify-end p-4">
           <button
-            class="btn btn-sm gap-2 text-xs dark:bg-gray-100 dark:text-gray-900 dark:border-gray-100"
+            class="state--selector"
             v-if="currentActivity === activityFlags.PURCHASE"
             @click="setActivity(activityFlags.SIGNIN)"
           >
             <login-icon class="rotate-180" />Signin
           </button>
           <button
-            class="btn btn-sm gap-2 text-xs dark:bg-gray-100 dark:text-gray-900 dark:border-gray-100"
+            class="state--selector"
             v-else
             @click="setActivity(activityFlags.PURCHASE)"
           >
             <cash-icon />Purchase
           </button>
-          <swap class="w-1/12 dark:text-gray-50 " @change="toggleDarkScreen" />
+          <swap class="w-1/12 dark:text-gray-700" @change="toggleDarkScreen" />
         </div>
 
         <div
@@ -188,5 +174,9 @@ onMounted(() => {
 
 .hero--text {
   @apply text-gray-700 dark:text-gray-100 text-center;
+}
+
+.state--selector {
+  @apply btn btn-sm gap-2 text-xs dark:bg-gray-100 dark:text-gray-900 dark:border-gray-100 dark:hover:bg-gray-200;
 }
 </style>
