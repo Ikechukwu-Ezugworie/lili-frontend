@@ -6,7 +6,7 @@ import { useVuelidate } from '@vuelidate/core'
 import { helpers, required, email } from '@vuelidate/validators'
 import { Login as LoginIcon, Cash as CashIcon } from '../assets/icons/index.js'
 import { useToast } from "vue-toastification"
-import { Login, Register, Purchase, Swap } from '../components'
+import { Login, Register, Purchase, Swap, Modal } from '../components'
 import { activityFlags } from '../hooks/utils'
 import { useLocalStorage } from '../hooks/localStorageControl'
 import { discos } from '../data/discos'
@@ -95,6 +95,8 @@ onMounted(() => {
         />
       </div>
     </div>
+
+    <modal/>
 
     <div class="md:w-1/2 bg-gray-100 dark:bg-gray-700">
       <div

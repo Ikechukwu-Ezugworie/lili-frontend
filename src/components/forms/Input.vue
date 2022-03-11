@@ -3,6 +3,7 @@
     <input
       :placeholder="label"
       :disabled="disabled"
+      :maxlength="maxlength"
       :max="max || ''"
       :min="min || ''"
       :type="type"
@@ -42,6 +43,10 @@ export default defineComponent({
     max: {
       required: false,
       type: [Number, String] as PropType<number>,
+    },
+    maxlength: {
+      required: false,
+      type: [Number, String] as PropType<string | number>,
     },
     min: {
       required: false,

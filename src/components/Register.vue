@@ -151,6 +151,6 @@ const onSubmit = async (e: Event) => {
 
 <style>
 .toast-class {
-  @apply bg-gray-700 text-gray-100 text-xs;
+  @apply bg-gray-700 text-gray-100 text-xs border border-gray-100;
 }
 </style>
