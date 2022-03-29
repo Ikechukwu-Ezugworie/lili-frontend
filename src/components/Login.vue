@@ -23,7 +23,7 @@ const { withMessage } = helpers
 const { register, loading } = useAuth()
 const errors = ref<Record<string, string[]>>()
 const { errorMsg, serverMsg } = useForm(errors)
-const toast = useToast();
+const toast = useToast()
 
 const rules = computed(() => ({
   email: {

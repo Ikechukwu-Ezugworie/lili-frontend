@@ -90,7 +90,8 @@ onMounted(() => {
             p-0.5
             ease-in-out
             duration-500
-            ring-1 ring-gray-200
+            ring-1 ring-gray-700
+            bg-white
           "
         />
       </div>
@@ -118,7 +119,7 @@ onMounted(() => {
             from all discos in Nigeria.
           </p>
         </div>
-        <div class="flex flex-row space-x-2 w-full justify-end p-4">
+        <div class="flex flex-row space-x-2 md:space-x-1 w-full justify-end p-4">
           <button
             class="state--selector"
             v-if="currentActivity === activityFlags.PURCHASE"

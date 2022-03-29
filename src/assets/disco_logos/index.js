@@ -11,5 +11,5 @@ import phedc from './phedc.png'
 import yedc from './yedc.png'
 
 export {
-  aedc, bedc, eedc, ekedc, ibedc, ikeja, jedc, kedc, kedco, phedc, yedc
+    aedc, bedc, eedc, ekedc, ibedc, ikeja, jedc, kedc, kedco, phedc, yedc
 }

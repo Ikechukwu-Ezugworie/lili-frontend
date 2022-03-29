@@ -8,14 +8,18 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
-    "allowJs": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "allowJs": true
   },
   "include": [
-    "src/**/*.ts", 
-    "src/**/*.d.ts", 
+    "src/**/*.ts",
+    "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue", 
-    "src/hooks/store.js", "src/assets/icons/index.js", 
+    "src/**/*.vue",
+    "src/hooks/store.js",
+    "src/assets/icons/index.js"
   ]
 }

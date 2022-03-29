@@ -5,5 +5,5 @@ import Swap from './Swap.vue'
 import Modal from './Modal.vue'
 
 export {
-  Login, Purchase, Register, Swap, Modal
+    Login, Purchase, Register, Swap, Modal
 }

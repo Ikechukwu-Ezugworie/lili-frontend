@@ -19,7 +19,6 @@ import {
 } from '@vuelidate/validators/dist/raw.esm'
 
 
-
 const emit = defineEmits<{
   (e: 'setActivity', id: number | string): void
 }>()
@@ -86,7 +85,7 @@ const verifyMeterNumber = async (meterNumber: string) => {
 const paystack = reactive({
   email: 'i.ezugworie@gmail.com',
   // amount: null,
-  firstname: 'Ibrahim',
+  firstname: 'Lili',
   // lastname: 'Oluwatobi',
   // phone: '08066261222',
   currency: 'naira',

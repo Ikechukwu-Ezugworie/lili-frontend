@@ -1,16 +1,6 @@
 <template>
   <label
-    class="
-      swap swap-rotate
-      text-gray-200
-      dark:text-gray-700
-      rounded-lg
-      bg-gray-700
-      dark:bg-gray-100
-      dark:hover:bg-gray-200
-      hover:bg-gray-800
-      py-1
-    "
+    class="swap swap-rotate text-gray-200 dark:text-gray-700 rounded-lg bg-gray-700 dark:bg-gray-100 dark:hover:bg-gray-200 hover:bg-gray-800 py-1"
     @change="onChange"
   >
     <!-- this hidden checkbox controls the state -->

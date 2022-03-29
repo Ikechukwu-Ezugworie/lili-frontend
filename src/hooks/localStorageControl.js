@@ -1,21 +1,21 @@
 export const useLocalStorage = () => {
-  const getItem = key => {
-    const data = typeof window !== 'undefined' ? localStorage.getItem(key) : ''
-    try {
-      return JSON.parse(data)
-    } catch (err) {
-      return data
+    const getItem = key => {
+        const data = typeof window !== 'undefined' ? localStorage.getItem(key) : ''
+        try {
+            return JSON.parse(data)
+        } catch (err) {
+            return data
+        }
     }
-  }
 
-  const setItem = (key, value) => {
-    const stringify = typeof value !== 'string' ? JSON.stringify(value) : value
-    return localStorage.setItem(key, stringify)
-  }
+    const setItem = (key, value) => {
+        const stringify = typeof value !== 'string' ? JSON.stringify(value) : value
+        return localStorage.setItem(key, stringify)
+    }
 
-  const removeItem = key => {
-    localStorage.removeItem(key)
-  }
+    const removeItem = key => {
+        localStorage.removeItem(key)
+    }
 
-  return { getItem, setItem, removeItem }
+    return {getItem, setItem, removeItem}
 }
