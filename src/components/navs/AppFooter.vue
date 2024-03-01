@@ -2,7 +2,7 @@
   <footer class="items-center p-4 footer bg-neutral text-neutral-content">
     <div class="items-center grid-flow-col">
       
-      <p>Copyright © 2022 - All right reserved</p>
+      <p>Copyright © {{ currentYear }} - All right reserved</p>
     </div>
     <div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
       <a
@@ -48,7 +48,11 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      currentYear: new Date().getFullYear()
+    };
+  }
 }
 </script>
 
